@@ -7,9 +7,20 @@ class UserProfile(models.Model):
     status = models.CharField(max_length=32)
 
 class DompetDigital(models.Model):
-    userprofile = models.OneToOneField(
+    # userprofile = models.OneToOneField(
+    #     UserProfile,
+    #     on_delete=models.CASCADE,
+    #     primary_key=True,
+    # )
+    # saldo = models.IntegerField()
+    TYPE = (
+        ('O', 'Ovo'),
+        ('D', 'Dana'),
+        ('G', 'Gopay')
+    )
+    user_profiles = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE,
-        primary_key=True,
     )
+    type = models.CharField(max_length=1, choices=TYPE, db_index=True)
     saldo = models.IntegerField()
